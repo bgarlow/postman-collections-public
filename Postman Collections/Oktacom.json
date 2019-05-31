@@ -1,0 +1,3120 @@
+{
+  "info": {
+    "_postman_id": "b257f26e-0936-4f1a-b53a-ce827edc82c1",
+    "name": "Oktacom",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Reset Demo",
+      "item": [
+        {
+          "name": "reset App B app user profile",
+          "_postman_id": "e753d6c8-14cb-4174-a801-ff8075982390",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"profile\": {\n\t    \"street_address\": null,\n\t    \"country\": null,\n\t    \"website\": null,\n\t    \"zoneinfo\": \"America/Los_Angeles\",\n\t    \"birthdate\": null,\n\t    \"music_genre\": null,\n\t    \"gender\": null,\n\t    \"formatted\": null,\n\t    \"profile\": null,\n\t    \"locality\": null,\n\t    \"given_name\": null,\n\t    \"middle_name\": null,\n\t    \"locale\": \"en-US\",\n\t    \"picture\": null,\n\t    \"name\": \"hotdog@maililinator.com\",\n\t    \"nickname\": null,\n\t    \"phone_number\": null,\n\t    \"region\": null,\n\t    \"postal_code\": null,\n\t    \"family_name\": null,\n\t    \"email\": \"hotdog@maililinator.com\",\n\t    \"hobby\": null,\n\t    \"movie_genre\": null\n\t}\n}"
+            },
+            "url": "{{url}}/api/v1/apps/{{appB-appInstanceId}}/users/{{userId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "bf9dcd85-d1fa-4377-8c83-4d3dd4012297"
+    },
+    {
+      "name": "Authn RuleSet (A) 0oakbz83n2mygkzdo0h7",
+      "item": [
+        {
+          "name": "Create Authn RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "771cfd0e-e4c7-4092-9f33-32879b6ad6e0",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-authnRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "267ee7b4-96e5-4292-a35d-2410b228121d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"AuthN RuleSet App A\",\n\t\"type\": \"Okta:AuthenticationFactors\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create AuthN Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "989b9ea0-7d0c-4983-baed-0fca1a963efc",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-authnRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "999cd2e6-4fc0-4f21-9f7f-3a68292f555b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:AuthenticationFactors\",\n   \"rulesetId\":\"{{appA-authnRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n    \t\"factorRequirements\": []\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-authnRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Update AuthN Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "989b9ea0-7d0c-4983-baed-0fca1a963efc",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-authnRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "717b6d05-2fec-4cef-80f2-adf284e3d9e8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:AuthenticationFactors\",\n   \"rulesetId\":\"{{appA-authnRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n    \t\"factorRequirements\": [\n\t        {\n\t            \"factor\": {\n\t                \"provider\": \"OKTA\",\n\t                \"factorType\": \"email\"\n\t            },\n\t            \"factorPromptMode\": \"ALWAYS\"\n\t        }  \n\t\t\t]\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-authnRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Create AuthN Ruleset Mapping",
+          "_postman_id": "f4a4c1c1-4673-467d-a372-f8f3b8e69efb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appA-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-authnRuleSetId}}/mappings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get AuthN RuleSet",
+          "_postman_id": "1b5e7b2b-b5ab-4a5a-aa1f-cb8daf58177d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appA-authnRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get mappings",
+          "_postman_id": "3fa2117b-c6bd-4484-89b6-fc12c3dae5ea",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appA-authnRuleId}}\",\n    \"rulesetId\": \"{{appA-authnRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\": {\n        \"factorRequirements\": []\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-authnRuleSetId}}/rules/{{appA-authnRuleId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get AuthN Rule",
+          "_postman_id": "22cb46e9-28f2-4bc5-8c41-aaf5cd42f979",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appA-authnRuleSetId}}/rules/{{appA-authnRuleId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "d74b04a6-dad1-4c66-91c7-92d99fdc2db1",
+      "description": "Endpoints to configure authentication policy"
+    },
+    {
+      "name": "Authn RuleSet (C) 0oakbzp6j7DAxABK30h7",
+      "item": [
+        {
+          "name": "Create Authn RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "771cfd0e-e4c7-4092-9f33-32879b6ad6e0",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appC-authnRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "8d89f26f-b12f-4fef-9198-43d7ac1c3c6e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"AuthN RuleSet App C\",\n\t\"type\": \"Okta:AuthenticationFactors\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create AuthN Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "989b9ea0-7d0c-4983-baed-0fca1a963efc",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appC-authnRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "437c517f-d657-4b85-b356-9e836f3b89c8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:AuthenticationFactors\",\n   \"rulesetId\":\"{{appC-authnRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n    \t\"factorRequirements\": [\n            {\n                \"factor\": {\n                    \"provider\": \"OKTA\",\n                    \"factorType\": \"email\"\n                },\n                \"factorPromptMode\": \"ALWAYS\"\n            }    \t\t\n    \t]\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appC-authnRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Create AuthN Ruleset Mapping",
+          "_postman_id": "8026167c-42f6-44b1-84c8-2d2eb01226ca",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appC-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appC-authnRuleSetId}}/mappings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get AuthN RuleSet",
+          "_postman_id": "0e3c8f99-b357-498e-903a-673cb637d375",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appC-authnRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update AuthN Rule",
+          "_postman_id": "842e91d5-6e15-4f97-a812-673903cba43c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appC-authnRuleId}}\",\n    \"rulesetId\": \"{{appC-authnRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\": {\n        \"factorRequirements\": [\n            {\n                \"factor\": {\n                    \"provider\": \"OKTA\",\n                    \"factorType\": \"password\"\n                },\n                \"factorPromptMode\": \"ALWAYS\"\n            }    \n        ]\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appC-authnRuleSetId}}/rules/{{appC-authnRuleId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get AuthN Rule",
+          "_postman_id": "20029bf8-c9a2-43e6-9fa3-b4922243d894",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appC-authnRuleSetId}}/rules/{{appC-authnRuleId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "fa48eb17-b67c-4893-81df-b7e2b616af35",
+      "description": "Endpoints to configure authentication policy"
+    },
+    {
+      "name": "Authn RuleSet (D) 0oakiklmy4bVCs92C0h7",
+      "item": [
+        {
+          "name": "Create Authn RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "771cfd0e-e4c7-4092-9f33-32879b6ad6e0",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appD-authnRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "c29b0d45-84fb-4c14-a3dc-cd44d2776969",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"AuthN RuleSet App D\",\n\t\"type\": \"Okta:AuthenticationFactors\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create AuthN Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "989b9ea0-7d0c-4983-baed-0fca1a963efc",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appD-authnRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "3c099426-73bf-4e2e-ac83-461bfd5c2aea",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:AuthenticationFactors\",\n   \"rulesetId\":\"{{appD-authnRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n    \t\"factorRequirements\": [\n            {\n                \"factor\": {\n                    \"provider\": \"OKTA\",\n                    \"factorType\": \"password\"\n                },\n                \"factorPromptMode\": \"ALWAYS\"\n            }    \t\t\n    \t]\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-authnRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Create AuthN Ruleset Mapping",
+          "_postman_id": "3f066ff3-e129-4397-a29f-f4b098aff4db",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appD-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-authnRuleSetId}}/mappings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get AuthN RuleSet",
+          "_postman_id": "b83d1c3f-c7a2-436d-bcb3-c6c16b7e3e55",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appD-authnRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update AuthN Rule",
+          "_postman_id": "c1597362-7adb-40cf-bc71-bb48ef5f11f9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appD-authnRuleId}}\",\n    \"rulesetId\": \"{{appD-authnRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\": {\n        \"factorRequirements\": [\n         {\n            \"factor\":{\n               \"provider\":\"OKTA\",\n               \"factorType\":\"push\"\n            },\n            \"factorPromptMode\":\"ALWAYS\"\n         }\n         \t\n        ]\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-authnRuleSetId}}/rules/{{appD-authnRuleId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get AuthN Rule",
+          "_postman_id": "6ee5c7f1-f349-4bf0-8e9e-a1e8d51f7d57",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appD-authnRuleSetId}}/rules/{{appD-authnRuleId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "dcdecc75-4d00-495d-99e2-e7cb4a31c589",
+      "description": "Endpoints to configure authentication policy"
+    },
+    {
+      "name": "Authn RuleSet  (Default)",
+      "item": [
+        {
+          "name": "Create Authn RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "771cfd0e-e4c7-4092-9f33-32879b6ad6e0",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"default-authnRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "d1a4e7c7-0dd3-46b3-9b69-3633d6e68e06",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"AuthN RuleSet Default\",\n\t\"type\": \"Okta:AuthenticationFactors\",\n\t\"isDefault\": \"true\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create AuthN Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "989b9ea0-7d0c-4983-baed-0fca1a963efc",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-authnRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "677fe8c0-e412-48d3-af13-95331913d248",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:AuthenticationFactors\",\n   \"rulesetId\":\"{{default-authnRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n    \t\"factorRequirements\": []\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{default-authnRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Get AuthN RuleSet",
+          "_postman_id": "ed54d41d-f690-44fc-81e6-76625e97eb77",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{default-authnRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update AuthN Rule",
+          "_postman_id": "04415a04-9181-4313-a9cb-30799cb10409",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appA-authnRuleId}}\",\n    \"rulesetId\": \"{{appA-authnRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\": {\n        \"factorRequirements\": []\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-authnRuleSetId}}/rules/{{appA-authnRuleId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get AuthN Rule",
+          "_postman_id": "af4f43c0-a019-4fd3-89d5-a85b2b162ba2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appA-authnRuleSetId}}/rules/{{appA-authnRuleId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "c223a6e8-9025-47ed-91fb-449a77bd18c3",
+      "description": "Endpoints to configure authentication policy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "eaa4b819-dab6-436e-a855-0400322ba0d7",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "01850b85-7778-4f1a-a9a0-e40b46ef69de",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authn RuleSet (B) 0oakbzrrapVCFZG5B0h7",
+      "item": [
+        {
+          "name": "Create Authn RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "95890c3a-3c3f-414d-9b9d-7722cbcddd55",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appB-authnRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "d196b070-4722-4375-b058-a913a06106c8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"AuthN RuleSet App B\",\n\t\"type\": \"Okta:AuthenticationFactors\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create AuthN Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "64d0f60d-4e48-4a76-b87d-60f8372782ea",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appB-authnRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "12bbbc48-e4ff-441e-ac84-095672e2dd01",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:AuthenticationFactors\",\n   \"rulesetId\":\"{{appB-authnRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n    \t\"factorRequirements\": [\n            {\n                \"factor\": {\n                    \"provider\": \"OKTA\",\n                    \"factorType\": \"password\"\n                },\n                \"factorPromptMode\": \"ALWAYS\"\n            }    \t\t\n    \t]\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appB-authnRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Get AuthN RuleSet",
+          "_postman_id": "423c65f2-b68f-44dc-a1e5-2a501ebce1d5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appB-authnRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete AuthN RuleSet",
+          "_postman_id": "e8688012-b2a3-4d67-ba44-acd76d880d4e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appB-authnRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update AuthN Rule",
+          "_postman_id": "140c52e5-e1fd-4569-8a79-4d8c68a2dc17",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appB-authnRuleId}}\",\n    \"rulesetId\": \"{{appB-authnRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\": {\n        \"factorRequirements\": [\n            {\n                \"factor\": {\n                    \"provider\": \"OKTA\",\n                    \"factorType\": \"email\"\n                },\n                \"factorPromptMode\": \"ALWAYS\"\n            }        \t\n        ]\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appB-authnRuleSetId}}/rules/{{appB-authnRuleId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Create AuthN Ruleset Mapping",
+          "_postman_id": "adbce90f-6f6f-4ef0-a4d7-a85302d549df",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appB-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appB-authnRuleSetId}}/mappings"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "f3538df6-2b69-444e-a23f-d75a6af82ad9",
+      "description": "Endpoints to configure authentication policy"
+    },
+    {
+      "name": "Enroll RuleSet (A) 0oakbz83n2mygkzdo0h7",
+      "item": [
+        {
+          "name": "Create Enrollment RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "99ea1c04-17e2-4b89-a036-123263c559ed",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-enrollRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "c9677287-aded-43e6-a4e7-5bed010d8d0b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Enrollment RuleSet App A\",\n\t\"type\": \"Okta:EnrollmentProfile\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Enrollment Rule (without Pre-Registration Inline Hook)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "535eb0d0-de36-493f-b372-e0455ab1720b",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-enrollRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "d516907e-81fb-4899-a31a-f337895893c6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"type\": \"Okta:EnrollmentProfile\",\n    \"rulesetId\": \"{{appA-enrollRuleSetId}}\",\n    \"priority\": 1,\n    \"action\": \"ALLOW\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"requirement\": {}\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-enrollRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Enrollment Rule (with Pre-Registration Inline Hook)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "535eb0d0-de36-493f-b372-e0455ab1720b",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-enrollRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "f19dc058-9c05-40f8-89f9-4b27044a1e6e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:EnrollmentProfile\",\n   \"rulesetId\":\"{{appA-enrollRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\":{\n      \"inlineHookRequirements\": [\n        {\n          \"preRegistrationInlineHookId\": \"{{inlineHookId}}\"\n        }\n      ]\n   }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-enrollRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Enroll RuleSet Mapping",
+          "_postman_id": "42bddedc-123d-496e-b48a-de03498e2175",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appA-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-enrollRuleSetId}}/mappings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enrollment RuleSet",
+          "_postman_id": "e38d1ac5-438c-4283-b092-93e92c100b18",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appA-enrollRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Enrollment Rule",
+          "_postman_id": "5d5d0e43-5568-42bf-81a8-5d7aee48bee1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appA-enrollRuleId}}\",\n    \"rulesetId\": \"{{appA-enrollRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\":{\n      \"inlineHookRequirements\": [\n        {\n        }\n      ]\n   }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-enrollRuleSetId}}/rules/{{appA-enrollRuleId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "875c0b75-bb1b-46fe-9885-451463adbfd3",
+      "description": "Endpoints to configure user enrollment policy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "30624343-3a4e-44ca-8bc7-5040b69d50f1",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "b5235b67-a1ac-48ef-a5a0-5405fa290049",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enroll RuleSet (D)",
+      "item": [
+        {
+          "name": "Create Enrollment RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "99ea1c04-17e2-4b89-a036-123263c559ed",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appD-enrollRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "f8ebe45d-a7a7-45a3-9c3c-2cb83add2a3a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Enrollment RuleSet App D\",\n\t\"type\": \"Okta:EnrollmentProfile\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Enrollment Rule (without Pre-Registration Inline Hook)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "535eb0d0-de36-493f-b372-e0455ab1720b",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-enrollRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "dfbab0f5-ba6d-4aca-95ac-57b3a35ba97c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"type\": \"Okta:EnrollmentProfile\",\n    \"rulesetId\": \"{{appD-enrollRuleSetId}}\",\n    \"priority\": 1,\n    \"action\": \"ALLOW\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"requirement\": {}\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-enrollRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Enrollment Rule (with Pre-Registration Inline Hook)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "535eb0d0-de36-493f-b372-e0455ab1720b",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appD-enrollRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "2fa4e03d-63ae-41bf-9fed-cac4c9624b4d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:EnrollmentProfile\",\n   \"rulesetId\":\"{{appD-enrollRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\":{\n      \"inlineHookRequirements\": [\n        {\n          \"preRegistrationInlineHookId\": \"{{inlineHookId}}\"\n        }\n      ]\n   }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-enrollRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Enroll RuleSet Mapping",
+          "_postman_id": "f64872b1-f84c-4d61-a7ba-8f4198bff6c5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appD-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-enrollRuleSetId}}/mappings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enrollment RuleSet",
+          "_postman_id": "b116ab19-e125-4e1a-bc27-d4d5d9570672",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appD-enrollRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Enrollment Rule",
+          "_postman_id": "382e3add-82d5-46ae-8ad1-8e3c4496e778",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appD-enrollRuleId}}\",\n    \"rulesetId\": \"{{appD-enrollRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\":{\n      \"inlineHookRequirements\": [\n        {\n        \t\"preRegistrationInlineHookId\": \"{{inlineHookId}}\"\n        }\n      ]\n   }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-enrollRuleSetId}}/rules/{{appD-enrollRuleId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "e7b59a1f-67b1-434a-95f2-1eac424b9e15",
+      "description": "Endpoints to configure user enrollment policy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "30624343-3a4e-44ca-8bc7-5040b69d50f1",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "b5235b67-a1ac-48ef-a5a0-5405fa290049",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enrollment RuleSet (Default)",
+      "item": [
+        {
+          "name": "Create Enrollment RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "99ea1c04-17e2-4b89-a036-123263c559ed",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"default-enrollRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "70ce6b63-1a11-452e-8b9f-305d74e98d84",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Enrollment RuleSet Default\",\n\t\"type\": \"Okta:EnrollmentProfile\",\n\t\"isDefault\": \"true\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Enrollment Rule (without Pre-Registration Inline Hook)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "535eb0d0-de36-493f-b372-e0455ab1720b",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"default-enrollRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "9815afff-ab98-42fa-9311-b3dde7e9f1d2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"type\": \"Okta:EnrollmentProfile\",\n    \"rulesetId\": \"{{default-enrollRuleSetId}}\",\n    \"priority\": 1,\n    \"action\": \"ALLOW\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"requirement\": {}\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{default-enrollRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Enrollment Rule (with Pre-Registration Inline Hook)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "535eb0d0-de36-493f-b372-e0455ab1720b",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-enrollRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "afc47fd1-6cba-43a2-89db-4edace64dc69",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:EnrollmentProfile\",\n   \"rulesetId\":\"{{appA-enrollRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\":{\n      \"inlineHookRequirements\": [\n        {\n          \"preRegistrationInlineHookId\": \"{{inlineHookId}}\"\n        }\n      ]\n   }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-enrollRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enrollment RuleSet",
+          "_postman_id": "0fed6ec8-b1d6-40fb-880b-cdd4f19d6919",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{default-enrollRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Enrollment Rule",
+          "_postman_id": "edc2ada3-2dd7-49bf-960b-a74fbbdd359b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appA-enrollRuleId}}\",\n    \"rulesetId\": \"{{appA-enrollRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\":{\n      \"inlineHookRequirements\": [\n        {\n          \"preRegistrationInlineHookId\": \"{{inlineHookId}}\"\n        }\n      ]\n   }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-enrollRuleSetId}}/rules/{{appA-enrollRuleId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "29970fb1-5535-41a2-9d34-816caf50b8a6",
+      "description": "Endpoints to configure user enrollment policy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "f6220c8f-ba6b-4990-b8b1-df74c7cf8913",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "2746d34b-4713-4a32-bba7-fb8f6dae262e",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enrollment RuleSet (B) 0oakbzrrapVCFZG5B0h7",
+      "item": [
+        {
+          "name": "Create Enrollment RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "f08f117a-20e9-4ac6-9b87-36b929242160",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appB-enrollRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "ccb5a0ca-0ba1-40be-91b9-598464ecc07a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Enrollment RuleSet App B\",\n\t\"type\": \"Okta:EnrollmentProfile\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Enrollment Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5b642bb8-775e-472e-b05d-3742401bebea",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appB-enrollRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "0773ed16-5036-4d10-97e5-c33d4fe70052",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:EnrollmentProfile\",\n   \"rulesetId\":\"{{appB-enrollRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\":{\n        \t\"factorRequirements\": []\n   }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appB-enrollRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enrollment RuleSet",
+          "_postman_id": "fe5b8235-6743-4316-a9d9-a23028bd1d4c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appB-enrollRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Enrollment Rule",
+          "_postman_id": "941559dd-16b4-449b-a822-6e5634483dce",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appB-enrollRuleId}}\",\n    \"rulesetId\": \"{{appB-enrollRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\": {\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appB-enrollRuleSetId}}/rules/{{appB-enrollRuleId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Enroll RuleSet Mapping",
+          "_postman_id": "af9b4201-aea5-4da0-853b-2719c9e98e19",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appB-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appB-enrollRuleSetId}}/mappings"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "bb6b5f6f-86dc-4fe0-ac44-86c70f31e7ab",
+      "description": "Endpoints to configure user enrollment policy"
+    },
+    {
+      "name": "Activation RuleSet (A) 0oakbz83n2mygkzdo0h7",
+      "item": [
+        {
+          "name": "Create Activation RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "6bbbcf04-19e5-4eb1-b0cf-e5f18722143c",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-activationRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "660908e4-bc01-41a3-81d5-67764452a382",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Activation RuleSet App A\",\n\t\"type\": \"Okta:ActivationFactors\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Activation Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ce997532-d958-4731-91e5-d75801caa13e",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-activationRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "e189a1cd-1e53-4a66-9464-27237d83c507",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:ActivationFactors\",\n   \"rulesetId\":\"{{appA-activationRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n    \t\"factorRequirements\": []\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-activationRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Activation RuleSet Mapping",
+          "_postman_id": "62a1dd0f-8b90-4636-a155-0bcd2e7613d7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appA-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-activationRuleSetId}}/mappings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Activation RuleSet",
+          "_postman_id": "8e6bbf0d-dd7f-4206-9a8d-a99d795c8821",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appA-activationRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Activation Rule",
+          "_postman_id": "df90fb0b-73fd-4f37-adb2-8caf8c381b8a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appA-activationRuleId}}\",\n    \"rulesetId\": \"{{appA-activationRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\": {\n        \"factorRequirements\": []\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-activationRuleSetId}}/rules/{{appA-activationRuleId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "4f73e2e9-d2f3-4546-95ba-e61d5de009f6",
+      "description": "Endpoints to configure user activation policy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "9b02e9e4-b944-4c73-a335-8278673b001c",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "3e693623-1967-489c-83b5-5fb24f7a8602",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activation RuleSet (Default)",
+      "item": [
+        {
+          "name": "Create Activation RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "6bbbcf04-19e5-4eb1-b0cf-e5f18722143c",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"default-activationRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "f50ac167-3640-4746-aa7b-afda83e66250",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Activation RuleSet Default\",\n\t\"type\": \"Okta:ActivationFactors\",\n\t\"isDefault\": \"true\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Activation Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ce997532-d958-4731-91e5-d75801caa13e",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appA-activationRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "503ccb1b-0c25-4d10-87b6-8251cf715c5c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:ActivationFactors\",\n   \"rulesetId\":\"{{default-activationRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n    \t\"factorRequirements\": []\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{default-activationRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Activation RuleSet",
+          "_postman_id": "e909bdf9-01ab-4f98-a84b-a0f5d6e35442",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{default-activationRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Activation Rule",
+          "_postman_id": "1432d613-e245-4ec8-982f-200a6871ca15",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appA-activationRuleId}}\",\n    \"rulesetId\": \"{{appA-activationRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\": {\n        \"factorRequirements\": []\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-activationRuleSetId}}/rules/{{appA-activationRuleId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "b96cd198-3074-4c1f-b808-c46922bab4b9",
+      "description": "Endpoints to configure user activation policy"
+    },
+    {
+      "name": "Activation RuleSet (B) 0oakbzrrapVCFZG5B0h7",
+      "item": [
+        {
+          "name": "Create Activation RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "655e200d-c3c7-4db9-b669-db55efddccf1",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appB-activationRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "4ce02c3a-2f02-4031-ab38-aa36167217c7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Activation RuleSet App B\",\n\t\"type\": \"Okta:ActivationFactors\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Activation Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8f08120b-3285-49e9-9518-dc8adc919a8a",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appB-activationRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "04850994-b155-4a85-b78f-0102e02daba3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:ActivationFactors\",\n   \"rulesetId\":\"{{appB-activationRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n        \t\"factorRequirements\": [\n            {\n                \"factor\": {\n                    \"provider\": \"OKTA\",\n                    \"factorType\": \"password\"\n                },\n                \"factorEnrollmentType\": \"REQUIRED\"\n            }         \t\t\n        ]\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appB-activationRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Activation RuleSet",
+          "_postman_id": "3a42f8ef-9641-4155-bf3b-8a0275d9f409",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appB-activationRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Activation Rule",
+          "_postman_id": "e22e6efc-69a9-4c90-8bb8-9709772e4fc4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "        {\n            \"type\": \"Okta:ActivationFactors\",\n            \"id\": \"{{appB-activationRuleId}}\",\n            \"rulesetId\": \"{{appB-activationRuleSetId}}\",\n            \"conditions\": [\n                {\n                    \"key\": \"Okta:UserType\",\n                    \"op\": \"EQUALS\",\n                    \"value\": \"Default\"\n                }\n            ],\n            \"action\": \"ALLOW\",\n            \"requirement\": {\n                \"factorRequirements\": [\n                    {\n                        \"factor\": {\n                            \"provider\": \"OKTA\",\n                            \"factorType\": \"password\"\n                        },\n                        \"factorEnrollmentType\": \"REQUIRED\"\n                    }\n                ]\n            }\n        }"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appB-activationRuleSetId}}/rules/{{appB-activationRuleId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Activation RuleSet Mapping",
+          "_postman_id": "9aac4db3-42ea-4047-9453-e1dda44d02b2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appB-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appB-activationRuleSetId}}/mappings"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "76f06e8e-2595-4741-97c6-6581978b735e",
+      "description": "Endpoints to configure user activation policy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "a7ec121e-52c3-4a02-865a-a15112c00fd6",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "e96d56c9-d369-497e-97e4-08d57e1cad81",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activation RuleSet (C) 0oakbzp6j7DAxABK30h7",
+      "item": [
+        {
+          "name": "Create Activation RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "655e200d-c3c7-4db9-b669-db55efddccf1",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appC-activationRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "558b578b-db43-41fe-8d89-fcf4dbcdd782",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Activation RuleSet App C\",\n\t\"type\": \"Okta:ActivationFactors\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Activation Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8f08120b-3285-49e9-9518-dc8adc919a8a",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appC-activationRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "5ea8cbf4-a023-42a7-849b-4b62ec0c7b2b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:ActivationFactors\",\n   \"rulesetId\":\"{{appC-activationRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n        \t\"factorRequirements\": [\n            {\n                \"factor\": {\n                    \"provider\": \"OKTA\",\n                    \"factorType\": \"password\"\n                },\n                \"factorEnrollmentType\": \"REQUIRED\"\n            }         \t\t\n        ]\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appC-activationRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Activation RuleSet",
+          "_postman_id": "808362b3-2cd4-43cb-8820-ad47f2f2127e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appC-activationRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Activation Rule",
+          "_postman_id": "b22598eb-bfca-4590-b324-6a6b8bba8371",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "        {\n            \"type\": \"Okta:ActivationFactors\",\n            \"id\": \"{{appC-activationRuleId}}\",\n            \"rulesetId\": \"{{appC-activationRuleSetId}}\",\n            \"conditions\": [\n                {\n                    \"key\": \"Okta:UserType\",\n                    \"op\": \"EQUALS\",\n                    \"value\": \"Default\"\n                }\n            ],\n            \"action\": \"ALLOW\",\n            \"requirement\": {\n                \"factorRequirements\": [\n                    {\n                        \"factor\": {\n                            \"provider\": \"OKTA\",\n                            \"factorType\": \"password\"\n                        },\n                        \"factorEnrollmentType\": \"REQUIRED\"\n                    }\n                ]\n            }\n        }"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appC-activationRuleSetId}}/rules/{{appC-activationRuleId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Activation RuleSet Mapping",
+          "_postman_id": "278b8e44-d6f0-49fc-88b7-e0897575cf53",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appC-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appC-activationRuleSetId}}/mappings"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "8d9e14e1-56b3-4e8d-8863-665faa939858",
+      "description": "Endpoints to configure user activation policy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "a7ec121e-52c3-4a02-865a-a15112c00fd6",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "e96d56c9-d369-497e-97e4-08d57e1cad81",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activation RuleSet (D)",
+      "item": [
+        {
+          "name": "Create Activation RuleSet",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "655e200d-c3c7-4db9-b669-db55efddccf1",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appD-activationRuleSetId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "08cf96fa-1790-4106-8e3b-4007b2d9a6f0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Activation RuleSet App D\",\n\t\"type\": \"Okta:ActivationFactors\",\n\t\"isDefault\": \"false\",\n\t\"rules\": [],\n\t\"resourceIds\": []\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Activation Rule",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8f08120b-3285-49e9-9518-dc8adc919a8a",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"appD-activationRuleId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "3b94b418-990b-4f4a-b3d1-2e688f1af038",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n   \"type\":\"Okta:ActivationFactors\",\n   \"rulesetId\":\"{{appD-activationRuleSetId}}\",\n   \"priority\":1,\n   \"action\":\"ALLOW\",\n   \"conditions\":[\n   \t{\n         \"key\":\"Okta:UserType\",\n         \"op\":\"EQUALS\",\n         \"value\":\"Default\"\n      }\n    ],\n   \"requirement\": {\n        \t\"factorRequirements\": [\n            {\n                \"factor\": {\n                    \"provider\": \"OKTA\",\n                    \"factorType\": \"password\"\n                },\n                \"factorEnrollmentType\": \"REQUIRED\"\n            }         \t\t\n        ]\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-activationRuleSetId}}/rules"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Activation RuleSet",
+          "_postman_id": "a5415466-b1fd-4071-bf28-7ad0d1cb27ea",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/rulesets/{{appD-activationRuleSetId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Activation Rule",
+          "_postman_id": "abca7112-df79-45d1-a0ba-259d113fe642",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "        {\n            \"type\": \"Okta:ActivationFactors\",\n            \"id\": \"{{appD-activationRuleId}}\",\n            \"rulesetId\": \"{{appD-activationRuleSetId}}\",\n            \"conditions\": [\n                {\n                    \"key\": \"Okta:UserType\",\n                    \"op\": \"EQUALS\",\n                    \"value\": \"Default\"\n                }\n            ],\n            \"action\": \"ALLOW\",\n            \"requirement\": {\n                \"factorRequirements\": [\n            {\n                \"factor\": {\n                    \"provider\": \"OKTA\",\n                    \"factorType\": \"push\"\n                },\n                \"factorEnrollmentType\": \"REQUIRED\"\n            }\n                ]\n            }\n        }"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-activationRuleSetId}}/rules/{{appD-activationRuleId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Activation RuleSet Mapping",
+          "_postman_id": "52dd3cfb-7d6e-4ea7-890f-9d430d3f1ca2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"resourceType\": \"APP\",\n\t\"resourceId\": \"{{appD-appInstanceId}}\"\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-activationRuleSetId}}/mappings"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "5484136e-004e-4ee9-9637-6850f3ac602b",
+      "description": "Endpoints to configure user activation policy",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "a7ec121e-52c3-4a02-865a-a15112c00fd6",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "e96d56c9-d369-497e-97e4-08d57e1cad81",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inline hooks",
+      "item": [
+        {
+          "name": "Get All Hooks",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "620cd650-15b8-4d42-8d79-a382be663c4c",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "",
+                  "for(var i=0; i<jsonData.length; i++) {",
+                  "    if(jsonData[i].type === \"com.okta.user.pre-registration\") {",
+                  "        postman.setEnvironmentVariable(\"inlineHookId\", jsonData[i].id);",
+                  "        break;",
+                  "    }",
+                  "}",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "fa2227a4-8297-4ef4-84eb-d65d93084f0b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              }
+            ],
+            "url": "{{url}}/api/v1/inlineHooks"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "4ea661d4-8fcb-4998-94f1-7dc151671cb5"
+    },
+    {
+      "name": "Demo Flow",
+      "item": [
+        {
+          "name": "Get ID Token for App A",
+          "_postman_id": "51481911-3564-4448-a3ca-9dd6a028a4db",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/oauth2/v1/authorize?client_id={{appA-appInstanceId}}&response_type=id_token&response_mode=fragment&scope=openid profile&redirect_uri={{appA-redirectUrl}}&state=state-{{$guid}}&nonce=nonce-{{$guid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "oauth2",
+                "v1",
+                "authorize"
+              ],
+              "query": [
+                {
+                  "key": "client_id",
+                  "value": "{{appA-appInstanceId}}"
+                },
+                {
+                  "key": "response_type",
+                  "value": "id_token"
+                },
+                {
+                  "key": "response_mode",
+                  "value": "fragment"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid profile"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "{{appA-redirectUrl}}"
+                },
+                {
+                  "key": "state",
+                  "value": "state-{{$guid}}"
+                },
+                {
+                  "key": "nonce",
+                  "value": "nonce-{{$guid}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get ID Token for App B",
+          "_postman_id": "43dd8b31-a84c-40a0-b004-039bf988144b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/oauth2/v1/authorize?client_id={{appB-appInstanceId}}&response_type=id_token&response_mode=fragment&scope=openid profile&redirect_uri={{appB-redirectUrl}}&state=state-{{$guid}}&nonce=nonce-{{$guid}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "oauth2",
+                "v1",
+                "authorize"
+              ],
+              "query": [
+                {
+                  "key": "client_id",
+                  "value": "{{appB-appInstanceId}}"
+                },
+                {
+                  "key": "response_type",
+                  "value": "id_token"
+                },
+                {
+                  "key": "response_mode",
+                  "value": "fragment"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid profile"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "{{appB-redirectUrl}}"
+                },
+                {
+                  "key": "state",
+                  "value": "state-{{$guid}}"
+                },
+                {
+                  "key": "nonce",
+                  "value": "nonce-{{$guid}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get /userinfo",
+          "_postman_id": "c197a570-df2e-4d75-b53c-0464cbddedd9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": ""
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "c3562b31-4e90-4152-8f44-4af0d79d0118"
+    },
+    {
+      "name": "mappings",
+      "item": [
+        {
+          "name": "Get mappings App A",
+          "_postman_id": "72cd578b-8d68-4188-9a59-ca3cb9a9e8fe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"{{appA-authnRuleId}}\",\n    \"rulesetId\": \"{{appA-authnRuleSetId}}\",\n    \"conditions\": [\n        {\n            \"key\": \"Okta:UserType\",\n            \"op\": \"EQUALS\",\n            \"value\": \"Default\"\n        }\n    ],\n    \"action\": \"ALLOW\",\n    \"requirement\": {\n        \"factorRequirements\": []\n    }\n}"
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appA-authnRuleSetId}}/mappings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get mappings App B",
+          "_postman_id": "c0bb8d2f-47f1-45ec-97fe-a84ac0190e2d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appB-authnRuleSetId}}/mappings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get mappings App C",
+          "_postman_id": "2c7df951-97d1-42d1-8805-3f8b916c65aa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "SSWS {{apikey}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appC-authnRuleSetId}}/mappings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get mappings App D",
+          "_postman_id": "c5dce00d-8618-4c43-a379-a36ad77e8a72",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "type": "text",
+                "value": "SSWS {{apikey}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "{{url}}/api/v1/rulesets/{{appD-authnRuleSetId}}/mappings"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "bf1d9256-7663-4ce4-b4b2-000db7150810"
+    },
+    {
+      "name": "Get All Rulesets",
+      "_postman_id": "757c1070-0128-4059-a5a6-a41cc69324d2",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "SSWS {{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": "{{url}}/api/v1/rulesets/"
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Ruleset",
+      "_postman_id": "c89ac280-f965-4229-bc5e-bc5dc09ca1f4",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "SSWS {{apikey}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "name": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": "{{url}}/api/v1/rulesets/{{ruleSetId}}"
+      },
+      "response": []
+    }
+  ]
+}
